@@ -257,7 +257,8 @@
            ueber dem Bild). */
         var secs = [];
         for (var p0 = 0; p0 < panels[i].children.length; p0++) {
-          if (panels[i].children[p0].tagName === "SECTION") {
+          if (panels[i].children[p0].tagName === "SECTION" &&
+              !panels[i].children[p0].hasAttribute("data-track-skip")) {
             secs.push(panels[i].children[p0]);
           }
         }

@@ -7,6 +7,7 @@
   var video1 = document.getElementById("video-1");
   var video2 = document.getElementById("video-2");
   var overlay = document.getElementById("stageOverlay");
+  var veil = document.getElementById("introVeil");
   var toggle = document.getElementById("soundToggle");
 
   var SCRUB_VH = 2;   // Scrollstrecke für Video 1 (in Viewport-Höhen); danach 1vh Pin für Video 2
@@ -81,6 +82,13 @@
 
     // Ausgeblendet = nicht klickbar (Sprachumschalter liegt im Overlay)
     overlay.style.visibility = progress >= 0.55 ? "hidden" : "visible";
+
+    // Intro-Overlay: Fade beim ersten Scrollen, danach nicht klickbar
+    if (veil) {
+      var vf = reduceMotion ? (progress > 0 ? 1 : 0) : clamp(progress / 0.06, 0, 1);
+      veil.style.opacity = String(1 - vf);
+      veil.style.visibility = vf >= 1 ? "hidden" : "visible";
+    }
 
     // Video 1: vollständig reversibel scrubben
     if (reduceMotion) {
@@ -847,7 +855,7 @@
     liveFrame.addEventListener("load", function () {
       if (!liveFrame.getAttribute("src")) return;
       if (liveStart) liveStart.disabled = false;
-      if (liveHint) liveHint.textContent = document.documentElement.lang === "en" ? "Runs right here – choose a model, upload an item, generate." : "Läuft direkt hier – Model wählen, Item hochladen, generieren.";
+      if (liveHint) liveHint.textContent = "";
     });
     liveFrame.addEventListener("error", function () {
       if (liveHint) liveHint.textContent = document.documentElement.lang === "en" ? "The live view could not be loaded here – please open it in a new tab." : "Die Live-Ansicht ließ sich hier nicht laden – bitte im neuen Tab öffnen.";
@@ -1052,6 +1060,8 @@
                                                         : (isEnglish ? "To Photo Studio" : "Zum Photo Studio");
     if (flipBtnArrow) flipBtnArrow.textContent = isBack ? "←" : "→";
     if (scrollBtn) {
+      var gd = document.getElementById("gateDim");
+      if (gd) gd.classList.toggle("is-on", front);
       scrollBtn.classList.toggle("is-visible", front);
       scrollBtn.setAttribute("aria-hidden", front ? "false" : "true");
       scrollBtn.tabIndex = front ? 0 : -1;

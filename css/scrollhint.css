@@ -34,25 +34,11 @@
      den Dialogen (Showroom 900, Bild-Ansicht 950, Tooltip 960): die
      verdecken den Hinweis, statt von ihm ueberlagert zu werden. */
   z-index: 45;
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  max-width: calc(100vw - 24px);
-  padding: .5rem .85rem;
-  border: 1px solid rgba(255, 255, 255, .22);
-  border-radius: 999px;
-  background: rgba(10, 10, 15, .72);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
-  backdrop-filter: blur(10px) saturate(140%);
-  color: #eaeaf5;
-  font-family: inherit;
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .14em;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  display: block;
+  width: 3rem;
+  height: 5.6rem;
+  color: #5458b0;
+  filter: drop-shadow(0 1px 6px rgba(255, 255, 255, .35));
   /* Nie im Weg: der Hinweis darf keinen Klick und kein Rad abfangen. */
   pointer-events: none;
   opacity: 0;
@@ -73,35 +59,29 @@
      animiert: der Abstand ist gemessen, er soll sofort stimmen und nicht
      nachwandern, waehrend unten rechts ein Knopf weiterwandert. */
   transition: opacity .35s ease, visibility 0s linear 0s;
-  /* Der Puls laeuft nur, solange der Hinweis steht: ein Ring in der
-     Akzentfarbe weitet sich und verblasst dabei. Bewusst nur box-shadow -
-     der Hinweis aendert weder Groesse noch Position, das Label bleibt
-     ruhig und scharf. */
-  animation: scrollhint-ring 2.8s ease-in-out infinite;
 }
 
-/* Pfeil nach unten: er zeigt die Richtung an und nickt dabei. */
-.scrollhint__arrow {
-  color: #9fb4ff;
-  font-size: 1.05em;
-  line-height: 1;
-  animation: scrollhint-bob 1.8s ease-in-out infinite;
+/* Drei weisse Pfeile: der obere beginnt klein, wird groesser, gleitet nach
+   unten und blendet aus; die naechsten folgen zeitversetzt. */
+.scrollhint__chev {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2.2rem;
+  height: auto;
+  margin-left: -1.1rem;
+  opacity: 0;
+  transform: translateY(-.3rem) scale(.45);
+  animation: scrollhint-chev 2.4s cubic-bezier(.4, 0, .2, 1) infinite;
 }
+.scrollhint__chev:nth-child(2) { animation-delay: .25s; }
+.scrollhint__chev:nth-child(3) { animation-delay: .5s; }
 
-@keyframes scrollhint-ring {
-  0%, 100% {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .35),
-                0 0 0 0 rgba(143, 147, 224, .34);
-  }
-  50% {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .35),
-                0 0 0 9px rgba(143, 147, 224, 0);
-  }
-}
-
-@keyframes scrollhint-bob {
-  0%, 100% { transform: translateY(-2px); }
-  50%      { transform: translateY(2px); }
+@keyframes scrollhint-chev {
+  0%   { opacity: 0; transform: translateY(-.3rem) scale(.45); }
+  25%  { opacity: 1; transform: translateY(.9rem) scale(1); }
+  55%  { opacity: 1; transform: translateY(1.9rem) scale(1.1); }
+  100% { opacity: 0; transform: translateY(4rem) scale(1.2); }
 }
 
 /* ---------- Schmale Bildschirme ----------
@@ -113,9 +93,6 @@
     right: clamp(12px, 2vw, 28px);
     bottom: var(--scrollhint-bottom,
                  calc(14px + 48px + 12px + env(safe-area-inset-bottom, 0px)));
-    padding: .45rem .7rem;
-    font-size: .62rem;
-    letter-spacing: .1em;
   }
 }
 
@@ -126,13 +103,8 @@
 @media (prefers-reduced-motion: reduce) {
   .scrollhint,
   .scrollhint.is-visible { transition: none; }
-  .scrollhint.is-visible {
-    animation: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .35),
-                0 0 0 3px rgba(143, 147, 224, .22);
-  }
-  .scrollhint__arrow {
-    animation: none;
-    transform: none;
-  }
+  .scrollhint__chev { animation: none; opacity: .9; transform: none; }
+  .scrollhint__chev:nth-child(1) { top: 0; }
+  .scrollhint__chev:nth-child(2) { top: 1.7rem; }
+  .scrollhint__chev:nth-child(3) { top: 3.4rem; }
 }

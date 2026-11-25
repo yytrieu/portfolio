@@ -111,3 +111,41 @@
   .viewnav__btn,
   .viewnav__btn.is-visible { transition: none; }
 }
+/* ---------- "Naechstes Projekt": auffaellig, Fuellung #5458b0, Puls-Ring ---------- */
+.viewnav__btn--next {
+  min-height: 62px;
+  gap: .8rem;
+  padding: .85rem 1.5rem;
+  font-size: 15px;
+  letter-spacing: .12em;
+  background: #5458b0;
+  border-color: #5458b0;
+  color: #fff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.viewnav__btn--next:hover { background: #666ac4; border-color: #666ac4; }
+.viewnav__btn--next .viewnav__arrow { color: #fff; font-size: 1.3em; }
+.viewnav__btn--next.is-visible {
+  animation: viewnav-ring 2.8s ease-out infinite;
+}
+.viewnav__btn--next.is-visible .viewnav__arrow {
+  animation: viewnav-nudge 1.4s ease-in-out infinite;
+}
+@keyframes viewnav-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(84, 88, 176, .65); }
+  70%  { box-shadow: 0 0 0 18px rgba(84, 88, 176, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(84, 88, 176, 0); }
+}
+@keyframes viewnav-nudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
+@media (max-width: 720px) {
+  .viewnav__btn--next { min-height: 56px; padding: .7rem 1.1rem; }
+  .viewnav__btn--next .viewnav__arrow { font-size: 1.6em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .viewnav__btn--next.is-visible,
+  .viewnav__btn--next.is-visible .viewnav__arrow { animation: none; }
+}

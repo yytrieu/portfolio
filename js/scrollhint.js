@@ -182,21 +182,22 @@
        vorlesen, und klickbar ist sie nicht (pointer-events: none). */
     el.setAttribute("aria-hidden", "true");
 
-    var label = document.createElement("span");
-    label.className = "scrollhint__label";
-    label.textContent = document.documentElement.lang === "en"
-      ? "Continue scrolling"
-      : "Weiter scrollen";
-
-    /* Pfeil nach unten: er nickt im Takt des Pulses und zeigt die
-       Richtung an. */
-    var arrow = document.createElement("span");
-    arrow.className = "scrollhint__arrow";
-    arrow.setAttribute("aria-hidden", "true");
-    arrow.textContent = "\u2193";
-
-    el.appendChild(label);
-    el.appendChild(arrow);
+    /* Drei weisse Chevrons, Animation in css/scrollhint.css */
+    for (var i = 0; i < 3; i++) {
+      var ns = "http://www.w3.org/2000/svg";
+      var svg = document.createElementNS(ns, "svg");
+      svg.setAttribute("class", "scrollhint__chev");
+      svg.setAttribute("viewBox", "0 0 48 28");
+      var p = document.createElementNS(ns, "path");
+      p.setAttribute("d", "M4 4l20 20L44 4");
+      p.setAttribute("fill", "none");
+      p.setAttribute("stroke", "currentColor");
+      p.setAttribute("stroke-width", "4");
+      p.setAttribute("stroke-linecap", "round");
+      p.setAttribute("stroke-linejoin", "round");
+      svg.appendChild(p);
+      el.appendChild(svg);
+    }
     document.body.appendChild(el);
   }
 

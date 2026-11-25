@@ -529,16 +529,39 @@ body {
 /* Tor am Graph-Ende: der Knopf sitzt dort unten mittig und heisst
    "Weiter scrollen" - er ist der einzige Weg weiter ins Photo Studio.
    Bewusst unten, damit er als naechster Schritt gelesen wird. */
+/* Tor am Graph-Ende: "Weiter scrollen" sitzt rechts direkt UNTER dem
+   Studio-Knopf (gleiche rechte Kante). */
 .flipbtn.is-gate {
-  top: calc(100% - clamp(1rem, 3vh, 2rem));
-  left: 50%;
-  /* Unterkante des Knopfes liegt clamp(1rem,3vh,2rem) ueber der Kartenkante. */
-  transform: translate(-50%, -100%);
-  border-color: rgba(143, 147, 224, .5);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .38);
+  top: calc(50% + 2.1rem);
+  left: calc(100% - clamp(.6rem, 1.2vw, 1.1rem));
+  transform: translate(-100%, 0);
 }
 .flipbtn.is-gate .flipbtn__arrow { font-size: 1.15em; line-height: 1; }
-.flipbtn.is-gate:hover { transform: translate(-50%, calc(-100% - 1px)); }
+.flipbtn.is-gate:hover { transform: translate(-100%, -1px); }
+
+/* Beide Knoepfe: Fuellung #5458b0, weisse Schrift */
+.flipbtn {
+  background: #5458b0;
+  border-color: #5458b0;
+  color: #fff;
+}
+.flipbtn:hover { background: #666ac4; border-color: #666ac4; }
+.flipbtn__arrow { color: #fff; }
+
+/* Schwarzer Layer 50 % ueber dem ComfyUI-Fenster, sobald das Graph-Ende
+   erreicht ist (js/script.js, syncFlipBtn). Knoepfe liegen darueber (z-index 3). */
+.gatedim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, .5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+.gatedim.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .gatedim { transition: none; } }
 /* Beim Drehen in die Rueckseite wandert der Knopf vom Tor (unten mittig)
    nach oben rechts. Der Uebergang kommt von top/left/transform oben - hier
    nichts weiter noetig. */
@@ -869,3 +892,58 @@ body {
 .lang-switch__btn.is-current { background: #4b509e; color: #fff; border-color: #4b509e; }
 .lang-switch__btn:hover { transform: translateY(-1px); }
 .lang-switch__btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 6px #000; }
+
+/* ---------- Intro-Overlay: schwarz 50 %, Sprachbuttons + Scroll-Pfeile ---------- */
+.intro-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 3; /* ueber .stage__overlay (Titel), unter Menueleiste (800, ausserhalb) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
+  padding: 1.5rem 1.5rem max(2.5rem, env(safe-area-inset-bottom));
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  opacity: 1; /* per JS beim ersten Scrollen */
+  will-change: opacity;
+}
+.intro-veil .lang-switch { margin-top: 0; }
+.intro-veil__arrows {
+  position: relative;
+  width: 3.5rem;
+  height: 6.5rem;
+  overflow: hidden;
+}
+.intro-veil__chev {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2rem;
+  height: auto;
+  margin-left: -1rem;
+  opacity: 0;
+  transform: translateY(-.4rem) scale(.45);
+  animation: intro-chev 2.4s cubic-bezier(.4, 0, .2, 1) infinite;
+}
+.intro-veil__chev:nth-child(2) { animation-delay: .25s; }
+.intro-veil__chev:nth-child(3) { animation-delay: .5s; }
+@keyframes intro-chev {
+  0%   { opacity: 0; transform: translateY(-.4rem) scale(.45); }
+  25%  { opacity: 1; transform: translateY(.9rem) scale(1); }
+  55%  { opacity: 1; transform: translateY(1.8rem) scale(1.15); }
+  100% { opacity: 0; transform: translateY(4.2rem) scale(1.3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-veil__chev { animation: none; opacity: .9; transform: none; }
+  .intro-veil__chev:nth-child(1) { top: 0; }
+  .intro-veil__chev:nth-child(2) { top: 1.6rem; }
+  .intro-veil__chev:nth-child(3) { top: 3.2rem; }
+}
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.live__hint:empty { display: none; }

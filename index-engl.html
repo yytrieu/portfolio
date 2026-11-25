@@ -31,10 +31,10 @@
        Same markup and behaviour as index.html, labels are project names. -->
   <nav class="topbar" id="topbar" aria-label="Projects">
     <ul class="topbar__list">
-      <li><a class="topbar__link" href="#main" data-view="0">nandemoii</a></li>
-      <li><a class="topbar__link" href="#serum" data-view="1">ai face serum</a></li>
-      <li><a class="topbar__link" href="#curtain-view" data-view="2">eggo</a></li>
-      <li><a class="topbar__link" href="#music-view" data-view="3">ai music</a></li>
+      <li><a class="topbar__link" href="#main" data-view="0">fashion</a></li>
+      <li><a class="topbar__link" href="#serum" data-view="1">cosmetic</a></li>
+      <li><a class="topbar__link" href="#curtain-view" data-view="2">accessory</a></li>
+      <li><a class="topbar__link" href="#music-view" data-view="3">music</a></li>
     </ul>
   </nav>
 
@@ -52,12 +52,21 @@
         <div class="stage__overlay" id="stageOverlay">
           <div class="stage__text">
             <h1 class="stage__title">creative vision</h1>
-            <p class="stage__subtitle">SYLVIA TRIEU PORTFOLIO</p>
-            <nav class="lang-switch" aria-label="Sprache / Language">
+            <p class="stage__subtitle">AI PORTFOLIO - SYLVIA TRIEU</p>
+          </div>
+        </div>
+
+        <div class="intro-veil" id="introVeil">
+          <nav class="lang-switch" aria-label="Sprache / Language">
               <a class="lang-switch__btn" href="index.html" lang="de" hreflang="de"><svg class="lang-switch__globe" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.8 2.6 2.8 15.4 0 18M12 3c-2.8 2.6-2.8 15.4 0 18" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span>Deutsch</span><svg class="lang-switch__chev" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
               <a class="lang-switch__btn is-current" href="index-engl.html" lang="en" hreflang="en" aria-current="page"><svg class="lang-switch__globe" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.8 2.6 2.8 15.4 0 18M12 3c-2.8 2.6-2.8 15.4 0 18" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span>English</span><svg class="lang-switch__chev" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </nav>
+          <div class="intro-veil__arrows" aria-hidden="true">
+            <svg class="intro-veil__chev" viewBox="0 0 48 28"><path d="M4 4l20 20L44 4" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="intro-veil__chev" viewBox="0 0 48 28"><path d="M4 4l20 20L44 4" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="intro-veil__chev" viewBox="0 0 48 28"><path d="M4 4l20 20L44 4" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
+          <span class="visually-hidden">Scroll down</span>
         </div>
 
         <button class="sound-toggle" id="soundToggle" type="button"
@@ -176,8 +185,7 @@
 
                   <div class="live__cover" id="liveCover">
                     <div class="live__card">
-                      <p class="live__kicker">Live prototype</p>
-                      <h3 class="live__title">AI Photo Studio</h3>
+                      <h3 class="live__title">Webapp Prototype</h3>
                       <p class="live__text">A web app built with Claude Code, including version control via GitHub and deployment via Netlify.</p>
                       <div class="live__actions">
                         <button class="live__btn live__btn--primary" id="liveStart" type="button" disabled>
@@ -202,6 +210,7 @@
                this page as well (js/script.js, css/style.css). It sits NEXT to
                .flip so it does not rotate with the surface and stays usable
                above both sides. Labels are set by js/script.js (lang="en"). -->
+          <div class="gatedim" id="gateDim" aria-hidden="true"></div>
           <button class="flipbtn" id="flipBtn" type="button">
             <span class="flipbtn__label" id="flipBtnLabel">To Photo Studio</span>
             <span class="flipbtn__arrow" id="flipBtnArrow" aria-hidden="true">&rarr;</span>
@@ -378,7 +387,7 @@
                aria-label="Project ai face serum – campaign film">
         <div class="project__stage p2-repeat">
           <div class="project__col project__col--text">
-            <h2 class="project__title reveal"><span class="reveal__inner">ai face serum</span></h2>
+            <h2 class="project__title reveal"><span class="reveal__inner">Visual Guardrail</span></h2>
             <p class="project__text fade-in">A premium skincare campaign told through texture and stillness. No narration. No distracting colors. Only surfaces, light, and transformation.</p>
           </div>
           <div class="project__col campaign__media">
@@ -576,32 +585,6 @@
         </div>
       </section>
 
-      <!-- Auslauf-Buehne von Ansicht 3 (siehe css/track.css): die
-           Ueberschrift des Musik-Teils steht hier als vollbildhohe
-           Titel-Karte am Ende des eggo-Tracks. Damit hat der Schwenk zu
-           Ansicht 4 die Buehne, die waehrend Leerlauf und Schwenk still am
-           Viewport steht - wie die "Notizen" in Ansicht 1 und
-           "ai solution" in Ansicht 2.
-
-           WARUM nicht die Video-Collage darueber: js/track.js setzt die
-           letzte Section einer Ansicht auf genau die Pin-Strecke (1.4
-           Viewport-Hoehen, run = hold + pan). Die Collage ist mit 1.87 vh
-           deutlich hoeher und hat kein overflow - sie wuerde ueberlaufen
-           und in Ansicht 4 hineinragen.
-
-           Die Karte selbst ist eine Bildschirmhoehe hoch
-           (.music-intro__inner); der Rest der Pin-Strecke bleibt unter der
-           Viewport-Unterkante und ist nicht zu sehen. -->
-      <section class="music-intro" aria-label="ai music – title card">
-        <div class="music-intro__inner">
-          <img class="music-intro__bg" src="media/projects/projekt-4/pantomime-suno.webp" alt="" decoding="async">
-          <!-- Overlay (schwarz 30 %) samt Schrift: blendet beim Scrollen aus (js/music.js) -->
-          <div class="music-intro__shade" id="musicIntroShade">
-            <h2 class="stage__title">ai music</h2>
-            <p class="stage__subtitle">SUNO MUSIC GENERATION</p>
-          </div>
-        </div>
-      </section>
 
     </div><!-- /Panel 3 -->
 
@@ -622,6 +605,19 @@
          Pantomime-Intro.mp4 im Projekt. Stil: css/music.css, Steuerung:
          js/music.js. -->
     <div class="track__panel track__panel--4" id="music-view">
+      <!-- Titel-Karte: erster Bildschirm von "ai music" (Vollbild-Bild, Overlay, Titel,
+           Untertitel). Overlay blendet beim Scrollen aus (js/music.js). -->
+      <section class="music-intro" aria-label="ai music – title card">
+        <div class="music-intro__inner">
+          <img class="music-intro__bg" src="media/projects/projekt-4/pantomime-suno.webp" alt="" decoding="async">
+          <!-- Overlay (schwarz 30 %) samt Schrift: blendet beim Scrollen aus (js/music.js) -->
+          <div class="music-intro__shade" id="musicIntroShade">
+            <h2 class="stage__title">ai music</h2>
+            <p class="stage__subtitle">SUNO MUSIC GENERATION</p>
+          </div>
+        </div>
+      </section>
+
       <section class="music" id="music" aria-label="ai music – music section">
         <div class="music__pin">
           <div class="music__stage">
@@ -828,7 +824,7 @@ is all we've got</pre>
             </div>
             <div class="endcard__col">
               <p class="endcard__col-head">Focus</p>
-              <p class="endcard__col-body">AI visuals<br>Fashion film<br>Brand identity</p>
+              <p class="endcard__col-body">E-Commerce<br>Beauty<br>Fashion<br>Brand Identity<br>AI Automation</p>
             </div>
             <div class="endcard__col">
               <p class="endcard__col-head">Based in</p>
@@ -858,7 +854,7 @@ is all we've got</pre>
     </button>
     <button class="viewnav__btn viewnav__btn--next" type="button" data-viewnav="next"
             aria-label="Next project" aria-hidden="true" tabindex="-1">
-      <span class="viewnav__label">Next</span>
+      <span class="viewnav__label">Next project</span>
       <span class="viewnav__arrow" aria-hidden="true">&rarr;</span>
     </button>
   </nav>
